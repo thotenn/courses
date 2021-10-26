@@ -1,3 +1,22 @@
+# Public section
+**/node_modules/**
+.idea/
+.vscode/
+public/dist
+public/static/
+public/templates/build/
+public/package-lock.json
+
+
+# Django section
+core/
+static/
+*.pyc
+**/__pycache__/**
+**/migrations/**
+*.sqlite3
+.eslintcache
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

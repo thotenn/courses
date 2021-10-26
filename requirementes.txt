@@ -1,0 +1,6 @@
+asgiref==3.4.1
+backports.zoneinfo==0.2.1
+-e git+https://github.com/django/django.git@b7fd668b37341fc92d67c4854c4f244e10895c9b#egg=Django
+gunicorn==20.1.0
+psycopg2-binary==2.9.1
+sqlparse==0.4.2
