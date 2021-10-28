@@ -2,7 +2,7 @@ import React from "react";
 
 const SelectCourse = ({}) => {
     return (
-        <div>Seleccione un curso</div>
+        <div><strong>Seleccione un curso</strong></div>
     )
 }
 

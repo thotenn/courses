@@ -11,10 +11,16 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 """
 import os
 from pathlib import Path
+from .pstruct import PSTRUCT, SYSTEMINFO
+
+PSTRUCT = PSTRUCT
+SYSTEMINFO = SYSTEMINFO
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 BASE_PROJECT = os.path.abspath(os.path.dirname(__name__))
+
+DB_DEFAULT_NAME = 'default'
 
 
 # Quick-start development settings - unsuitable for production
@@ -38,7 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'apps.students',
+    'core',
     'apps.courses',
     'public.apps.PublicConfig'
 ]

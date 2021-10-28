@@ -1,3 +1,4 @@
+const PUBLIC_URL = window.location.protocol + "//" + window.location.host;
 const env = {
     URLS: {
         home: '/',
@@ -7,8 +8,14 @@ const env = {
             notFound: '/error/404',
             unAuthorized: '/error/401',
         },
+        APIS: {
+            base: PUBLIC_URL + '/api/app/courses/apirestbase/'
+        },
         public: {
-            home: '/home'
+            home: '/home',
+            APIS: {
+                cursos: PUBLIC_URL + '/api/app/courses/courses/'
+            }
         }
     }
 }

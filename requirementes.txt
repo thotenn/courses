@@ -1,6 +1,9 @@
 asgiref==3.4.1
 backports.zoneinfo==0.2.1
--e git+https://github.com/django/django.git@b7fd668b37341fc92d67c4854c4f244e10895c9b#egg=Django
+Django==3.2
+django-safedelete==1.1.0
+djangorestframework==3.12.4
 gunicorn==20.1.0
 psycopg2-binary==2.9.1
+pytz==2021.3
 sqlparse==0.4.2
