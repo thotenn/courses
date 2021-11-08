@@ -1,4 +1,5 @@
-const PUBLIC_URL = window.location.protocol + "//" + window.location.host;
+// const PUBLIC_URL = window.location.protocol + "//" + window.location.host;
+const PUBLIC_URL = "http://localhost:8001";
 const env = {
     URLS: {
         home: '/',

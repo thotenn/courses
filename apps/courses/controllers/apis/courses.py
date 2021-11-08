@@ -10,7 +10,7 @@ class CoursesApi(GenView):
     api_url_name = 'courses'
 
     def get(self, request, format=None):
-        res = list(Course.objects.all().values('pk', 'nombre', 'descripcion'))
+        res = list(Course.objects.all().values('pk', 'nombre', 'descripcion', 'categoria', 'habilitado'))
         return Response(res)
 
     def post(self, request, format=None):
