@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { getCsrfToken } from '../controllers/server/ApiCommons';
 import AuthContext from './AuthContext';
 

@@ -1,5 +1,4 @@
 import React from "react";
-import CoursesController from "../../../../kernel/controllers/models/CoursesController";
 
 const initData = () => {
     return {
@@ -33,22 +32,8 @@ function coursesReducer(state, action) {
     }
 }
 
-export default function useCourses(isMounted) { 
+export default function useCourses() { 
     const [state, dispatch] = React.useReducer(coursesReducer, [], () => initData());
-    console.log('yea')
-    const coursesController = new CoursesController();
-
-    React.useEffect(() => {
-        console.log('en useEffect: ', state.reload);
-        if (state.reload) {
-            coursesController.getCourses().then(data => {
-                dispatch({type: actions.ADD_COURSES, payload: data});
-            }).catch(error => {
-                console.log(error);
-            });
-            dispatch({type: actions.RELOAD});
-        }
-    }, [state.reload]);
 
     return [
         state,

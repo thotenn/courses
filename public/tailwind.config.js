@@ -7,7 +7,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     fontFamily: {
-      iflower: ['Indie Flower', 'Open Sans']
+      primarytitle: ['Mochiy Pop P One', 'sans-serif'],
+      craftygirl: ['Crafty Girls', 'cursive'],
+      primarydesc: ['Dongle', 'sans-serif']
     },
     rotate: {
       '-180': '-180deg',

@@ -1,29 +1,53 @@
 import React from "react";
-import CoursesController from "../../../kernel/controllers/models/CoursesController";
-import useCourses from "./hooks/useCourses";
+import usePublic from "../../hooks/usePublic";
+import CourseCard from "./cmp/CourseCard";
 
-const SelectCourse = ({}) => {
+/**
+ * 
+ * @param {Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>} courses
+ * @returns JSX.element
+ */
+const SelectCourse = () => {
+    const {
+        state: publicState,
+        actions: publicActions,
+        dispatch: publicDispatch,
+        coursesState
+    } = usePublic();
     const isMounted = React.useRef(true);
-    const [coursesState, coursesActions, coursesDispatch] = useCourses(isMounted.current);
+
+    const selectCourse = (pk) => {
+        publicDispatch({
+            type: publicActions.SELECT_COURSE,
+            payload: pk
+        });
+        console.log(publicState.course.pk)
+    }
 
     React.useEffect(() => {
-        console.log('fsdf');
         return () => {
-            console.log('fsdf2');
             isMounted.current = false;
         }
     }, [])
 
     return (
-        <div>
-            {console.log('fsdf3')}
-            <strong>Seleccione un curso</strong>
-            <br />
-            <ul>
-                {coursesState.courses.map((item, key) => (
-                    <li key={key}>{item.nombre}</li>
-                ))}
-            </ul>
+        <div className="flex flex-col h-screen">
+            <div className="m-auto">
+                <div className="flex mx-3 justify-center font-primarytitle text-gray-200 text-2xl sm:text-4xl">
+                    Seleccione un curso
+                </div>
+                <div className="flex flex-col md:flex-row mt-5 max-w-2xl">
+                    {coursesState.courses.map((item, key) => (
+                        <CourseCard
+                            key={key}
+                            title={item.nombre}
+                            description={item.descripcion}
+                            cb={selectCourse}
+                            value={item.pk}
+                        />
+                    ))}
+                </div>
+            </div>
         </div>
     )
 }

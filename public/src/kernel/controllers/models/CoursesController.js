@@ -1,21 +1,22 @@
 import env from "../../env";
-import useAuth from "../../auth/useAuth";
-// import coursesConfig from "../../configs/courses";
 import { getFetchJsonDict } from "../server/ApiCommons";
 
 
 export default class CoursesController {
-    constructor(isMounted=true) {
-        this.auth = useAuth();
+    constructor(csrfToken, isMounted=true) {
         this.isMounted = isMounted;
-        console.log('COURSESCONTROLLER CONSTRUCTOR');
+        this.csrfToken = csrfToken;
     }
 
+    /**
+     * 
+     * @returns {Promise<Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>>|Promise<Object>}
+     */
     getCourses = () => {
         return new Promise((resolve, reject) => {
             getFetchJsonDict(
                 env.URLS.public.APIS.cursos,
-                this.auth.state.csrfToken,
+                this.csrfToken,
                 null,
                 null,
                 'GET'
@@ -31,5 +32,20 @@ export default class CoursesController {
                 reject({});
             })
         })
+    }
+
+    /**
+     * Obtiene el nombre de un curso por el pk enviado
+     * @param pk {number}
+     * @param courses {Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>}
+     * @returns {string|null}
+     */
+    getNameByPk = (pk, courses) => {
+        for (const item of courses){
+            if (item.pk === pk){
+                return item.nombre
+            }
+        }
+        return null;
     }
 }
