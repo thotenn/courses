@@ -14,12 +14,13 @@ class Student(BaseModel):
         managed = True
         verbose_name = 'Student'
         verbose_name_plural = 'Students'
+
     def __str__(self) -> str:
-        return super().__str__()
+        return self.apellido + ' ' + self.nombre + " ({})".format(self.identificador)
 
 
 class StudentUser(BaseModel):
-    student = models.ForeignKey(Student, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Estudiante', unique=True)
+    student = models.OneToOneField(Student, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Estudiante', unique=True)
     username = models.CharField('Usuario', blank=False, null=False, max_length=250)
     password = models.CharField('Pass', blank=False, null=False, max_length=550)
 

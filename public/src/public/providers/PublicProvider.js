@@ -54,8 +54,7 @@ const PublicProvider = ({children}) => {
     React.useEffect(() => {
         if (!coursesState.loaded.courses){
             // Si los cursos aun no fueron cargados
-            const coursesController = new CoursesController(authState.csrfToken, isMounted);
-            coursesController.getCourses().then(data => {
+            CoursesController.getCourses(isMounted.current, authState.csrfToken).then(data => {
                 coursesDispatch({type: coursesActions.ADD_COURSES, payload: data});
             }).catch(error => {
                 console.log(error);

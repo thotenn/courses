@@ -1,5 +1,7 @@
 // const PUBLIC_URL = window.location.protocol + "//" + window.location.host;
-const PUBLIC_URL = "http://localhost:8001";
+const PUBLIC_URL = window.location.protocol + "//" + window.location.host.slice(0, -4) + '8002';
+// const PUBLIC_URL = "http://localhost:8001";
+
 const env = {
     URLS: {
         home: '/',
@@ -14,8 +16,10 @@ const env = {
         },
         public: {
             home: '/home',
+            identify: '/identify',
             APIS: {
-                cursos: PUBLIC_URL + '/api/app/courses/courses/'
+                cursos: PUBLIC_URL + '/api/app/courses/courses/',
+                inscriptions: PUBLIC_URL + '/api/app/courses/inscriptions/',
             }
         }
     }

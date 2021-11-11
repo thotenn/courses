@@ -1,11 +1,18 @@
-import React from 'react'
+import React from 'react';
 
 const CourseCard = ({ title, description, imgsource, cb, value }) => {
+    const callFunction = () => {
+        if (cb) {
+            if (value) cb(value);
+            else cb();
+        }
+    }
+
     return (
         <div className="max-w-md py-4 px-8 bg-white shadow-lg rounded-lg my-2 mx-5">
             {imgsource
                 ? <div className="flex justify-center md:justify-end -mt-16">
-                    <img className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" />
+                    <img className="w-20 h-20 object-cover rounded-full border-2 border-indigo-500" src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80"  alt="img"/>
                 </div>
                 : <></>}
             <div>
@@ -16,7 +23,7 @@ const CourseCard = ({ title, description, imgsource, cb, value }) => {
                 <a
                     href="#"
                     className="text-xl font-craftygirl font-medium text-indigo-500"
-                    onClick={() => cb(value)}
+                    onClick={callFunction}
                 >
                     Seleccionar
                 </a>

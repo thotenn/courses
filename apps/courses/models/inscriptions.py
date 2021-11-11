@@ -2,11 +2,11 @@ import datetime
 from django.db import models
 from core.base import BaseModel
 from .courses import Course
-from .students import StudentUser
+from .students import Student
 
 
 class Inscription(BaseModel):
-    student = models.ForeignKey(StudentUser, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Estudiante')
+    student = models.ForeignKey(Student, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Estudiante')
     course = models.ForeignKey(Course, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Curso')
     fechainscripcion = models.DateField('Fecha de Inscripcion', blank=False, null=False, default=datetime.date.today)
     enrolled = models.BooleanField('Inscripto', null=False, blank=False, default=False)
@@ -25,7 +25,7 @@ class Inscription(BaseModel):
 
 
 class Desinscription(BaseModel):
-    student = models.ForeignKey(StudentUser, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Estudiante')
+    student = models.ForeignKey(Student, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Estudiante')
     course = models.ForeignKey(Course, blank=False, null=False, on_delete=models.PROTECT, verbose_name='Curso')
     fechabaja = models.DateField('Fecha de Baja', blank=False, null=False, default=datetime.date.today)
     motivo = models.TextField('Motivo', blank=False, null=False)

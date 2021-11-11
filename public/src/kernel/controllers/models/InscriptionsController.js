@@ -2,20 +2,24 @@ import env from "../../env";
 import { getFetchJsonDict } from "../server/ApiCommons";
 
 
-export default class CoursesController {
+export default class InscriptionsController {
     /**
      * @param isMounted {boolean}
      * @param csrfToken {string}
      * @returns {Promise<Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>>|Promise<Object>}
      */
-    static getCourses = (isMounted, csrfToken) => {
+    static isEnrolled = (identificador, course_pk, isMounted, csrfToken) => {
+        const body = {
+            type: "ins_is_enrolled",
+            payload: {identificador, course_pk}
+        };
         return new Promise((resolve, reject) => {
             getFetchJsonDict(
-                env.URLS.public.APIS.cursos,
+                env.URLS.public.APIS.inscriptions,
                 csrfToken,
                 null,
-                null,
-                'GET'
+                body,
+                'POST'
             ).then(response => {
                 if (response.status > 299) reject({});
                 return response.json()
@@ -24,7 +28,7 @@ export default class CoursesController {
                     resolve(data);
                 } else reject({});
             }).catch(error => {
-                console.log('Error en CoursesController.getCourses: ', error);
+                console.log('Error en InscriptionsController.isEnrolled: ', error);
                 reject({});
             })
         })

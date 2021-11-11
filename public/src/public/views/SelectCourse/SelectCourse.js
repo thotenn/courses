@@ -1,13 +1,16 @@
 import React from "react";
 import usePublic from "../../hooks/usePublic";
 import CourseCard from "./cmp/CourseCard";
+import {useHistory} from "react-router-dom";
+import env from "../../../kernel/env";
 
 /**
- * 
+ *
  * @param {Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>} courses
  * @returns JSX.element
  */
-const SelectCourse = () => {
+const SelectCourse = ({routes}) => {
+    const history = useHistory();
     const {
         state: publicState,
         actions: publicActions,
@@ -21,7 +24,11 @@ const SelectCourse = () => {
             type: publicActions.SELECT_COURSE,
             payload: pk
         });
-        console.log(publicState.course.pk)
+        history.push(env.URLS.public.identify);
+    }
+    const goView = () => {
+        console.log('public state: ', publicState);
+        history.push(env.URLS.public.identify);
     }
 
     React.useEffect(() => {
@@ -38,13 +45,17 @@ const SelectCourse = () => {
                 </div>
                 <div className="flex flex-col md:flex-row mt-5 max-w-2xl">
                     {coursesState.courses.map((item, key) => (
-                        <CourseCard
+                        <div
                             key={key}
-                            title={item.nombre}
-                            description={item.descripcion}
-                            cb={selectCourse}
-                            value={item.pk}
-                        />
+                            className="flex flex-col md:flex-row mt-5 max-w-2xl"
+                            style={{cursor: "pointer"}}
+                            onClick={() => selectCourse(item.pk)}
+                        >
+                            <CourseCard
+                                title={item.nombre}
+                                description={item.descripcion}
+                            />
+                        </div>
                     ))}
                 </div>
             </div>

@@ -135,7 +135,7 @@ STATIC_URL = '/static/'
 STATIC_DIR = 'static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_PROJECT, 'public/templates'),
-    os.path.join(BASE_PROJECT, 'public/dist'),
+    # os.path.join(BASE_PROJECT, 'public/static'),
 ]
 
 MEDIA_URL = '/media/'

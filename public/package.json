@@ -19,6 +19,7 @@
     "formik": "^2.2.6",
     "html2canvas": "^1.0.0-rc.7",
     "prop-types": "^15.7.2",
+    "react-icons": "^4.3.1",
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "unit-to-px": "^1.0.5",
