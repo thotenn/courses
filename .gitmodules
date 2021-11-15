@@ -1,0 +1,3 @@
+[submodule "public/src/plugins/windreact"]
+	path = public/src/plugins/windreact
+	url = https://github.com/thotenn/windreact
