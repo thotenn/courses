@@ -1,0 +1,39 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Run Back",
+            "type": "shell",
+            "command": "./kernel/tasks/dev/runbackend.sh",
+            "windows": {
+                "command": "./kernel/tasks/dev/runbackend.sh"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        },
+        {
+            "label": "Run Front",
+            "type": "shell",
+            "command": "./kernel/tasks/dev/runfrontend.sh",
+            "windows": {
+                "command": "./kernel/tasks/dev/runfrontend.sh"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            }
+        }
+    ]
+}

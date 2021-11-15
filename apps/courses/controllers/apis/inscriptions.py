@@ -19,7 +19,7 @@ class InscriptionsApi(GenView):
         content = None
         try:
             if api_type == 'ins_is_enrolled':
-                content = {"state": InscriptionsController.is_enrolled(payload['identificador'], payload['course_pk'])}
+                content = InscriptionsController.get_inscription_data(payload['identificador'], payload['course_pk'])
         except Exception as err:
             print(err)
             return Response('Error Request', status=status.HTTP_500_INTERNAL_SERVER_ERROR)

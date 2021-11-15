@@ -11,3 +11,16 @@ class InscriptionsController:
             return False
         inscrip = Inscription.objects.filter(course__pk=course_pk, student__identificador=identificador).exists()
         return inscrip
+
+    @staticmethod
+    def get_inscription_data(identificador, course_pk):
+        if not InscriptionsController.is_enrolled(identificador, course_pk):
+            return {"status": False}
+        student = Student.objects.get(identificador=identificador)
+        return {
+            "status": True,
+            "data": {
+                "nombre": student.nombre,
+                "apellido": student.apellido
+            }
+        }

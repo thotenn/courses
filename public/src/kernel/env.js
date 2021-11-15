@@ -1,5 +1,5 @@
 // const PUBLIC_URL = window.location.protocol + "//" + window.location.host;
-const PUBLIC_URL = window.location.protocol + "//" + window.location.host.slice(0, -4) + '8002';
+const PUBLIC_URL = window.location.protocol + "//" + window.location.host.slice(0, -4) + '8001';
 // const PUBLIC_URL = "http://localhost:8001";
 
 const env = {

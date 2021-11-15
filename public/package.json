@@ -1,7 +1,7 @@
 {
-  "name": "dalecomprapy",
+  "name": "courses",
   "version": "1.0.0",
-  "description": "dalecomprapy app",
+  "description": "courses app",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode=development --open --hot --config=webpack.development.config.js",
@@ -9,7 +9,7 @@
     "build": "webpack --mode production --config=webpack.production.config.js"
   },
   "keywords": [
-    "dalecomprapy"
+    "courses"
   ],
   "author": "thotenn",
   "license": "ISC",
