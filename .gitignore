@@ -8,7 +8,7 @@ public/templates/build/
 public/package-lock.json
 
 # Public/windreact
-public/src/plugins/windreact/.git
+public/src/plugins/windreact/.git/
 public/src/plugins/windreact/node_modules/
 public/src/plugins/windreact/LICENSE
 public/src/plugins/windreact/.gitignore
