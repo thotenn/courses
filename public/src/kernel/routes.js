@@ -20,8 +20,8 @@ export const publicRedirectsRoutes = [
         path: env.URLS.home,
         exact: false,
         // component: React.lazy(() => import('../public/PublicHome.js')),
-        // component: React.lazy(() => import('../public/views/Identify/Identify.js')),
-        component: React.lazy(() => import('../public/views/SelectCourse/SelectCourse.js')),
+        component: React.lazy(() => import('../public/views/Identify/Identify.js')),
+        // component: React.lazy(() => import('../public/views/SelectCourse/SelectCourse.js')),
     },
     {
         path: '*',

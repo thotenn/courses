@@ -26,10 +26,6 @@ const SelectCourse = ({routes}) => {
         });
         history.push(env.URLS.public.identify);
     }
-    const goView = () => {
-        console.log('public state: ', publicState);
-        history.push(env.URLS.public.identify);
-    }
 
     React.useEffect(() => {
         return () => {
