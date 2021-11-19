@@ -9,6 +9,7 @@ import InscriptionsController from '../../../kernel/controllers/models/Inscripti
 import useAuth from '../../../kernel/auth/useAuth';
 import LoaderSpinner from '../../../kernel/cmp/tools/LoaderSpinner';
 import Alert from '../../../plugins/windreact/src/cmp/Alert';
+import { InputText } from '../../../plugins/windreact/src/cmp/Form';
 
 const Identify = () => {
     const isMounted = React.useRef(true);
@@ -25,7 +26,10 @@ const Identify = () => {
         handleChangeInput,
         setValue
     ] = useFormBasic({
-        identificador: ""
+        identificador: "",
+        nombre: "",
+        apellido: "",
+        contacto: ""
     });
 
     const [state, setState] = React.useState({
@@ -34,7 +38,8 @@ const Identify = () => {
             status: true,
             data: {
                 apellido: "",
-                nombre: ""
+                nombre: "",
+                contacto: ""
             }
         }
     });
@@ -46,17 +51,34 @@ const Identify = () => {
     const isEnrolled = (e) => {
         e.preventDefault();
         setState({ ...state, loading: true });
-        InscriptionsController.isEnrolled(
-            formValues.identificador, publicState.course.pk, isMounted.current, authState.csrfToken
-        ).then(data => {
-            console.log(data);
-            if (!data.status) {
-            }
-            setState({ ...state, loading: false, dataGet: data });
-        }).catch(err => {
-            console.log(err);
-            setState({ ...state, loading: false });
-        });
+        if (state.dataGet.status) {
+            InscriptionsController.isEnrolled(
+                formValues.identificador, publicState.course.pk, isMounted.current, authState.csrfToken
+            ).then(data => {
+                console.log(data);
+                if (data.status) {
+                    // Si ya esta registrado
+                }
+                setState({ ...state, loading: false, dataGet: data });
+            }).catch(err => {
+                console.log(err);
+                setState({ ...state, loading: false });
+            });
+        } else {
+            // Si es que previamente el status era falso, osea se registrara ahora
+            InscriptionsController.createAccount(
+                formValues, publicState.course.pk, isMounted.current, authState.csrfToken
+            ).then(data => {
+                console.log(data);
+                if (data.status) {
+                    // Si se registro si inconvenientes
+                }
+                setState({ ...state, loading: false, dataGet: data });
+            }).catch(err => {
+                console.log(err);
+                setState({ ...state, loading: false });
+            });
+        }
     }
 
     React.useEffect(() => {
@@ -83,29 +105,45 @@ const Identify = () => {
                                 />
                             </div>}
                         <div className="divide-y divide-gray-200">
-                            <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                                <div className="relative">
+                            <div className="py-0 text-2xl leading-6 sm:leading-7 space-y-4 text-gray-700">
+                                <div className="px-2 pb-1 text-lg shadow-md rounded-md text-left">
                                     <form id={form_id} onSubmit={e => isEnrolled(e)}>
-                                        <input
-                                            id={form_id + "_ci"}
-                                            autoComplete="off" type="text"
-                                            className="placeholder-transparent my-2 h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                                            placeholder="Número de Cédula"
+                                        <InputText
+                                            title="Número de Cédula"
+                                            placeholder="Ingrese su número de cédula"
                                             value={formValues.identificador || ""}
                                             onChange={e => handleChangeInput(e, "identificador")}
+                                        // svgPath="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"
                                         />
-                                        <label
-                                            className="absolute left-0 -top-3.5 text-gray-600 text-sm"
-                                            for={form_id + "_ci"}
-                                        >
-                                            Ingrese su número de cédula
-                                        </label>
+                                        {!state.dataGet.status &&
+                                            <>
+                                                <InputText
+                                                    title="Nombre"
+                                                    placeholder="Ingrese su nombre"
+                                                    value={formValues.nombre || ""}
+                                                    onChange={e => handleChangeInput(e, "nombre")}
+                                                    type="text"
+                                                />
+                                                <InputText
+                                                    title="Apellido"
+                                                    placeholder="Ingrese su apellido"
+                                                    value={formValues.apellido || ""}
+                                                    onChange={e => handleChangeInput(e, "apellido")}
+                                                />
+                                                <InputText
+                                                    title="Contacto"
+                                                    placeholder="Ingrese su número de teléfono"
+                                                    type="tel"
+                                                    value={formValues.contacto || ""}
+                                                    onChange={e => handleChangeInput(e, "contacto")}
+                                                />
+                                            </>}
                                     </form>
                                 </div>
                                 <div className="relative">
                                     <button
                                         className={
-                                            "flex text-white rounded-md px-5 py-3 w-full " +
+                                            "flex text-white rounded-md px-5 py-3 w-full shadow-md hover:shadow-xl ease-linear transition-all duration-150 " +
                                             (state.dataGet.status
                                                 ? "bg-blue-500 hover:bg-blue-700"
                                                 : "bg-green-500 hover:bg-green-700") +

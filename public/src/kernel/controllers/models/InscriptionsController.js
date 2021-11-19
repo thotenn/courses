@@ -35,6 +35,37 @@ export default class InscriptionsController {
     }
 
     /**
+     * @param isMounted {boolean}
+     * @param csrfToken {string}
+     * @returns {Promise<Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>>|Promise<Object>}
+     */
+    static createAccount = (data, course_pk, isMounted, csrfToken) => {
+        const body = {
+            type: "ins_create_account",
+            payload: {data, course_pk}
+        };
+        return new Promise((resolve, reject) => {
+            getFetchJsonDict(
+                env.URLS.public.APIS.inscriptions,
+                csrfToken,
+                null,
+                body,
+                'POST'
+            ).then(response => {
+                if (response.status > 299) reject({});
+                return response.json()
+            }).then(data => {
+                if (isMounted) {
+                    resolve(data);
+                } else reject({});
+            }).catch(error => {
+                console.log('Error en InscriptionsController.createAccount: ', error);
+                reject({});
+            })
+        })
+    }
+
+    /**
      * Obtiene el nombre de un curso por el pk enviado
      * @param pk {number}
      * @param courses {Array<{pk: number, nombre: string, descripcion: string, categoria: string, habilitado: boolean}>}

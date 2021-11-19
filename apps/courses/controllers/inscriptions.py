@@ -24,3 +24,7 @@ class InscriptionsController:
                 "apellido": student.apellido
             }
         }
+
+    @staticmethod
+    def create_account(data, course_pk):
+        pass
