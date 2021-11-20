@@ -27,4 +27,14 @@ class InscriptionsController:
 
     @staticmethod
     def create_account(data, course_pk):
-        pass
+        print(course_pk)
+        print(data)
+        course_exists = Course.objects.filter(pk=course_pk).exists()
+        if not course_exists:
+            return {
+                "status": False
+            }
+        course = Course.objects.get(pk=course_pk)
+        student = Student(**data)
+        print('....................')
+        print(student)
