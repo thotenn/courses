@@ -10,7 +10,6 @@ import PublicProvider from "./providers/PublicProvider";
 import NavBar from "./cmp/NavBar";
 
 const PublicHome = ({}) => {
-    const [show, setShow] = React.useState(false);
     return (
         <div className="container mx-3 py-3">
             <PublicProvider>

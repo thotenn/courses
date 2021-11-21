@@ -1,6 +1,7 @@
 from ..models.inscriptions import Inscription
 from ..models.students import Student
 from ..models.courses import Course
+from ..models.inscriptions import Inscription
 
 class InscriptionsController:
     @staticmethod
@@ -14,16 +15,32 @@ class InscriptionsController:
 
     @staticmethod
     def get_inscription_data(identificador, course_pk):
-        if not InscriptionsController.is_enrolled(identificador, course_pk):
-            return {"status": False}
-        student = Student.objects.get(identificador=identificador)
-        return {
-            "status": True,
-            "data": {
+        student_exist = Student.objects.filter(identificador=identificador).exists()
+        student = None
+        student_data = {}
+        if student_exist:
+            student = Student.objects.get(identificador=identificador)
+            student_data = {
+                "identificador": student.identificador,
                 "nombre": student.nombre,
-                "apellido": student.apellido
+                "apellido": student.apellido,
+                # "contacto": student.contacto,
+                # "correo": student.correo
             }
+        res = {
+            "status": False,
+            "student_exist": False,
+            "data": {}
         }
+        if not InscriptionsController.is_enrolled(identificador, course_pk):
+            if student_exist:
+                res["student_exist"] = True
+                res["data"] = student_data
+        else:
+            res["status"] = True
+            res["student_exist"] = True
+            res["data"] = student_data
+        return res
 
     @staticmethod
     def create_account(data, course_pk):
@@ -35,6 +52,15 @@ class InscriptionsController:
                 "status": False
             }
         course = Course.objects.get(pk=course_pk)
-        student = Student(**data)
+        student_exists = Student.objects.filter(identificador=data['identificador']).exists()
+        if not student_exists:
+            student = Student(**data)
+            student.save()
+        else:
+            student = Student.objects.get(identificador=data['identificador'])
+        inscrip = Inscription(course=course, student=student)
+        inscrip.save()
+        print(inscrip)
         print('....................')
         print(student)
+        print(student.pk)

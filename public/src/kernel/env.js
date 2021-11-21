@@ -17,6 +17,7 @@ const env = {
         public: {
             home: '/home',
             identify: '/identify',
+            profile: '/profile',
             APIS: {
                 cursos: PUBLIC_URL + '/api/app/courses/courses/',
                 inscriptions: PUBLIC_URL + '/api/app/courses/inscriptions/',

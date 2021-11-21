@@ -13,6 +13,11 @@ export const publicRoutes = [
         exact: true,
         component: React.lazy(() => import('../public/views/Identify/Identify.js')),
     },
+    {
+        path: env.URLS.public.profile,
+        exact: true,
+        component: React.lazy(() => import('../public/views/Student/Profile.js')),
+    },
 ];
 
 export const publicRedirectsRoutes = [
@@ -20,8 +25,9 @@ export const publicRedirectsRoutes = [
         path: env.URLS.home,
         exact: false,
         // component: React.lazy(() => import('../public/PublicHome.js')),
-        component: React.lazy(() => import('../public/views/Identify/Identify.js')),
+        // component: React.lazy(() => import('../public/views/Identify/Identify.js')),
         // component: React.lazy(() => import('../public/views/SelectCourse/SelectCourse.js')),
+        component: React.lazy(() => import('../public/views/Student/Profile.js')),
     },
     {
         path: '*',

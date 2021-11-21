@@ -20,6 +20,10 @@ export default function useFormBasic(formInit){
         setFormValues(newFormValues);
     };
 
+    const setValues = (values) => {
+        setFormValues({...values})
+    }
+
     const cleanForm = () => {
         setFormValues(formInit);
     }
@@ -28,7 +32,8 @@ export default function useFormBasic(formInit){
         formValues,
         handleChangeInput,
         setValue,
-        cleanForm
+        cleanForm,
+        setValues
     ]
 
 }

@@ -10,10 +10,13 @@ import useAuth from '../../../kernel/auth/useAuth';
 import LoaderSpinner from '../../../kernel/cmp/tools/LoaderSpinner';
 import Alert from '../../../plugins/windreact/src/cmp/Alert';
 import { InputText } from '../../../plugins/windreact/src/cmp/Form';
+import {useHistory} from "react-router-dom";
+import env from '../../../kernel/env';
 
 const Identify = () => {
     const isMounted = React.useRef(true);
     const form_id = uuidv4();
+    const history = useHistory();
 
     const { state: authState } = useAuth();
     const {
@@ -24,7 +27,9 @@ const Identify = () => {
     const [
         formValues,
         handleChangeInput,
-        setValue
+        setValue,
+        cleanForm,
+        setValues
     ] = useFormBasic({
         identificador: "",
         nombre: "",
@@ -36,6 +41,7 @@ const Identify = () => {
         loading: false,
         dataGet: {
             status: true,
+            student_exist: false,
             data: {
                 apellido: "",
                 nombre: "",
@@ -57,7 +63,11 @@ const Identify = () => {
             ).then(data => {
                 console.log(data);
                 if (data.status) {
-                    // Si ya esta registrado
+                    history.push(env.URLS.public.profile);
+                } else {
+                    if (data.student_exist){
+                        setValues(data.data);
+                    }
                 }
                 setState({ ...state, loading: false, dataGet: data });
             }).catch(err => {
