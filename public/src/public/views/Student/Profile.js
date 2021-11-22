@@ -1,9 +1,17 @@
 import React from 'react'
-import { ProfileOne } from '../../../plugins/windreact/src/cmp/Dashboard'
+import { ProfileCardOne } from '../../../plugins/windreact/src/cmp/Dashboard'
+import TableProject from '../../../plugins/windreact/src/cmp/Tables/TableProject';
 
 const Profile = () => {
     return (
-        <ProfileOne />
+        <div className="h-screen">
+            <ProfileCardOne
+                name="Jose Enrique"
+                desc="lorem insput"
+            >
+                <TableProject/>
+            </ProfileCardOne>
+        </div>
     )
 }
 

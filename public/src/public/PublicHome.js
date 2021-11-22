@@ -9,23 +9,23 @@ import RoutesLayout from '../kernel/cmp/RoutesLayout';
 import PublicProvider from "./providers/PublicProvider";
 import NavBar from "./cmp/NavBar";
 
-const PublicHome = ({}) => {
+const PublicHome = ({ }) => {
     return (
         <div className="container mx-3 py-3">
             <PublicProvider>
-                    <Router>
-                        <NavBar />
-                        <Suspense fallback={<LoadingScreen />}>
-                            <Switch>
-                                {publicRoutes.map((route, i) => (
-                                    <RoutesLayout key={i} {...route} isPublic={true}/>
-                                ))}
-                                {publicRedirectsRoutes.map((route, i) => (
-                                    <RoutesLayout key={i} {...route} isPublic={true}/>
-                                ))}
-                            </Switch>
-                        </Suspense>
-                    </Router>
+                <Router>
+                    <NavBar />
+                    <Suspense fallback={<LoadingScreen />}>
+                        <Switch>
+                            {publicRoutes.map((route, i) => (
+                                <RoutesLayout key={i} {...route} isPublic={true} />
+                            ))}
+                            {publicRedirectsRoutes.map((route, i) => (
+                                <RoutesLayout key={i} {...route} isPublic={true} />
+                            ))}
+                        </Switch>
+                    </Suspense>
+                </Router>
             </PublicProvider>
         </div>
     )

@@ -6,8 +6,9 @@ import PublicHome from "./public/PublicHome";
 
 ReactDOM.render(
     <div className="bg-gradient-to-r from-pink-500 via-red-300 to-pink-300">
-    <AuthProvider>
-        <PublicHome />
-    </AuthProvider></div>,
+        <AuthProvider>
+            <PublicHome />
+        </AuthProvider>
+    </div>,
     document.getElementById('root')
 );
