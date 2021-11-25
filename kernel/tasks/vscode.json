@@ -1,6 +1,4 @@
-{
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
+/*{
     "version": "2.0.0",
     "tasks": [
         {
@@ -34,6 +32,32 @@
             "runOptions": {
                 "runOn": "folderOpen"
             }
+        },
+        {
+            "label": "Pull Fast",
+            "type": "shell",
+            "command": "./kernel/tasks/dev/gitpull.sh",
+            "windows": {
+                "command": "./kernel/tasks/dev/gitpull.sh"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "Push Fast",
+            "type": "shell",
+            "command": "./kernel/tasks/dev/gitpushfast.sh",
+            "windows": {
+                "command": "./kernel/tasks/dev/gitpushfast.sh"
+            },
+            "group": "none",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
         }
     ]
-}
+}*/
